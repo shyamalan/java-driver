@@ -37,10 +37,11 @@ public class CCMBridge {
 
     private static final String CASSANDRA_VERSION_REGEXP = "\\d\\.\\d\\.\\d(-\\w+)?";
 
-    private static final File CASSANDRA_DIR;
+    private static  File CASSANDRA_DIR;
     private static final String CASSANDRA_VERSION;
     static {
         String version = System.getProperty("cassandra.version");
+        version = "1.2.3";
         if (version.matches(CASSANDRA_VERSION_REGEXP)) {
             CASSANDRA_DIR = null;
             CASSANDRA_VERSION = "-v " + version;
@@ -48,10 +49,10 @@ public class CCMBridge {
             CASSANDRA_DIR = new File(version);
             CASSANDRA_VERSION = "";
         }
-
+//        CASSANDRA_DIR = new File("/Users/shyamsingh/1.2.3");
         String ip_prefix = System.getProperty("ipprefix");
         if (ip_prefix == null || ip_prefix.equals("")) {
-            ip_prefix = "127.0.1.";
+            ip_prefix = "127.0.0.";
         }
         IP_PREFIX = ip_prefix;
     }
@@ -66,19 +67,19 @@ public class CCMBridge {
 
     public static CCMBridge create(String name) {
         CCMBridge bridge = new CCMBridge();
-        bridge.execute("ccm create %s -b -i %s %s", name, IP_PREFIX, CASSANDRA_VERSION);
+        bridge.execute("/usr/local/bin/ccm create %s -b -i %s %s", name, IP_PREFIX, CASSANDRA_VERSION);
         return bridge;
     }
 
     public static CCMBridge create(String name, int nbNodes) {
         CCMBridge bridge = new CCMBridge();
-        bridge.execute("ccm create %s -n %d -s -i %s -b %s", name, nbNodes, IP_PREFIX, CASSANDRA_VERSION);
+        bridge.execute("/usr/local/bin/ccm create %s -n %d -s -i %s -b %s", name, nbNodes, IP_PREFIX, CASSANDRA_VERSION);
         return bridge;
     }
 
     public static CCMBridge create(String name, int nbNodesDC1, int nbNodesDC2) {
         CCMBridge bridge = new CCMBridge();
-        bridge.execute("ccm create %s -n %d:%d -s -i %s -b %s", name, nbNodesDC1, nbNodesDC2, IP_PREFIX, CASSANDRA_VERSION);
+        bridge.execute("/usr/local/bin/ccm create %s -n %d:%d -s -i %s -b %s", name, nbNodesDC1, nbNodesDC2, IP_PREFIX, CASSANDRA_VERSION);
         return bridge;
     }
 
@@ -149,8 +150,9 @@ public class CCMBridge {
     private void execute(String command, Object... args) {
         try {
             String fullCommand = String.format(command, args) + " --config-dir=" + ccmDir;
-            logger.debug("Executing: " + fullCommand);
-            Process p = runtime.exec(fullCommand, null, CASSANDRA_DIR);
+            logger.info("Executing: " + fullCommand);
+			File f = new File("/Users/shyamsingh/1.2.3");
+            Process p = runtime.exec(new String[]{"/bin/bash","-c",fullCommand});
             int retValue = p.waitFor();
 
             if (retValue != 0) {
@@ -167,7 +169,7 @@ public class CCMBridge {
                     logger.error("err> " + line);
                     line = errReader.readLine();
                 }
-                throw new RuntimeException();
+                //throw new RuntimeException();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -239,7 +241,7 @@ public class CCMBridge {
                 logger.info("Error during tests, kept C* logs in " + cassandraCluster.ccmDir);
             } else {
                 cassandraCluster.remove();
-                cassandraCluster.ccmDir.delete();
+                //cassandraCluster.ccmDir.delete();
             }
         }
 

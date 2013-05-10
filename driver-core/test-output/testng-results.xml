@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="165127" started-at="2013-05-10T04:08:37Z" finished-at="2013-05-10T04:11:22Z">
+    <groups>
+      <group name="short">
+        <method signature="SchemaTest.schemaExportOptionsTest()[pri:0, instance:com.datastax.driver.core.SchemaTest@3d7dc1cb]" name="schemaExportOptionsTest" class="com.datastax.driver.core.SchemaTest"/>
+        <method signature="SchemaTest.schemaExportTest()[pri:0, instance:com.datastax.driver.core.SchemaTest@3d7dc1cb]" name="schemaExportTest" class="com.datastax.driver.core.SchemaTest"/>
+      </group> <!-- short -->
+    </groups>
+    <test name="Default test" duration-ms="165127" started-at="2013-05-10T04:08:37Z" finished-at="2013-05-10T04:11:22Z">
+      <class name="com.datastax.driver.core.SchemaTest">
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.datastax.driver.core.SchemaTest@3d7dc1cb]" name="beforeClass" is-config="true" duration-ms="21944" started-at="2013-05-09T21:08:37Z" finished-at="2013-05-09T21:08:59Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="schemaExportOptionsTest()[pri:0, instance:com.datastax.driver.core.SchemaTest@3d7dc1cb]" name="schemaExportOptionsTest" duration-ms="7" started-at="2013-05-09T21:08:59Z" finished-at="2013-05-09T21:08:59Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- schemaExportOptionsTest -->
+        <test-method status="PASS" signature="schemaExportTest()[pri:0, instance:com.datastax.driver.core.SchemaTest@3d7dc1cb]" name="schemaExportTest" duration-ms="137335" started-at="2013-05-09T21:08:59Z" finished-at="2013-05-09T21:11:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- schemaExportTest -->
+        <test-method status="PASS" signature="discardCluster()[pri:0, instance:com.datastax.driver.core.SchemaTest@3d7dc1cb]" name="discardCluster" is-config="true" duration-ms="5826" started-at="2013-05-09T21:11:17Z" finished-at="2013-05-09T21:11:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- discardCluster -->
+      </class> <!-- com.datastax.driver.core.SchemaTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
